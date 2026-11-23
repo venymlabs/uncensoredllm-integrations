@@ -1,0 +1,21 @@
+{
+  "providerProfiles": {
+    "currentApiConfigName": "UncensoredLLM",
+    "apiConfigs": {
+      "UncensoredLLM": {
+        "id": "uncensoredllm",
+        "apiProvider": "openai",
+        "openAiBaseUrl": "https://uncensoredllm.xyz/v1",
+        "openAiApiKey": "",
+        "openAiModelId": "uncensoredllm-1",
+        "openAiStreamingEnabled": true,
+        "openAiCustomModelInfo": {
+          "contextWindow": 262144,
+          "maxTokens": 16384,
+          "supportsImages": false,
+          "supportsPromptCache": false
+        }
+      }
+    }
+  }
+}

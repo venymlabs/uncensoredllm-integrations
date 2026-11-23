@@ -1,0 +1,67 @@
+{
+  "name": "@uncensoredllm/ai-sdk-provider",
+  "version": "0.1.0",
+  "description": "UncensoredLLM provider for the Vercel AI SDK (ai 7, and ai 6 via /v6): streaming, tool calls, reasoning, structured output.",
+  "keywords": [
+    "ai",
+    "ai-sdk",
+    "vercel-ai-sdk",
+    "ai-sdk-provider",
+    "uncensoredllm",
+    "llm",
+    "openai-compatible"
+  ],
+  "homepage": "https://uncensoredllm.xyz/docs",
+  "license": "MIT",
+  "author": "UncensoredLLM",
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./v6": {
+      "types": "./dist/v6.d.ts",
+      "import": "./dist/v6.js",
+      "default": "./dist/v6.js"
+    }
+  },
+  "files": [
+    "dist/**/*",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "node scripts/clean.mjs && tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "npm run build && npm run typecheck && node scripts/check-version.mjs && node --test test/unit.test.mjs test/unit-v6.test.mjs",
+    "test:live": "node --test --test-concurrency=1 test/live.test.mjs",
+    "prepack": "npm run build"
+  },
+  "dependencies": {
+    "@ai-sdk/openai-compatible": "3.0.94",
+    "@ai-sdk/openai-compatible-v2": "npm:@ai-sdk/openai-compatible@2.0.94",
+    "@ai-sdk/provider": "4.0.39",
+    "@ai-sdk/provider-utils": "5.0.83",
+    "@ai-sdk/provider-utils-v4": "npm:@ai-sdk/provider-utils@4.0.67",
+    "@ai-sdk/provider-v3": "npm:@ai-sdk/provider@3.0.19"
+  },
+  "peerDependencies": {
+    "zod": "^3.25.76 || ^4.1.8"
+  },
+  "devDependencies": {
+    "@types/node": "26.6.6",
+    "ai": "7.0.179",
+    "ai-v6": "npm:ai@6.0.336",
+    "typescript": "7.0.2",
+    "zod": "4.6.7"
+  }
+}

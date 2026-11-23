@@ -1,0 +1,28 @@
+{
+  "$schema": "https://app.kilo.ai/config.json",
+  "provider": {
+    "uncensoredllm": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "UncensoredLLM",
+      "env": [
+        "UNCENSOREDLLM_API_KEY"
+      ],
+      "options": {
+        "baseURL": "https://uncensoredllm.xyz/v1"
+      },
+      "models": {
+        "uncensoredllm-1": {
+          "name": "UncensoredLLM 1",
+          "tool_call": true,
+          "reasoning": true,
+          "attachment": false,
+          "limit": {
+            "context": 262144,
+            "output": 65536
+          }
+        }
+      }
+    }
+  },
+  "model": "uncensoredllm/uncensoredllm-1"
+}

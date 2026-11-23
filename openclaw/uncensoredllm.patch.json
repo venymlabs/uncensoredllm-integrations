@@ -1,0 +1,35 @@
+{
+  "models": {
+    "providers": {
+      "uncensoredllm": {
+        "baseUrl": "https://uncensoredllm.xyz/v1",
+        "apiKey": "${UNCENSOREDLLM_API_KEY}",
+        "api": "openai-completions",
+        "models": [
+          {
+            "id": "uncensoredllm-1",
+            "name": "UncensoredLLM 1",
+            "reasoning": true,
+            "input": [
+              "text"
+            ],
+            "contextWindow": 262144,
+            "maxTokens": 65536,
+            "compat": {
+              "supportsReasoningEffort": false
+            }
+          }
+        ]
+      }
+    }
+  },
+  "agents": {
+    "defaults": {
+      "models": {
+        "uncensoredllm/uncensoredllm-1": {
+          "alias": "uncensoredllm"
+        }
+      }
+    }
+  }
+}

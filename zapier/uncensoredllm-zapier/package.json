@@ -1,0 +1,17 @@
+{
+  "name": "uncensoredllm-zapier",
+  "version": "1.0.0",
+  "description": "Zapier integration for UncensoredLLM",
+  "main": "index.js",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "test": "jest --testTimeout 120000 --runInBand"
+  },
+  "dependencies": {
+    "zapier-platform-core": "19.3.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}

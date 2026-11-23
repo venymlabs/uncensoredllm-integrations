@@ -1,0 +1,108 @@
+{
+	"name": "UncensoredLLM: balance, one prompt, and an agent with a tool",
+	"nodes": [
+		{
+			"parameters": {},
+			"id": "8a3f5d0e-0001-4c1a-9d3e-000000000001",
+			"name": "When clicking 'Execute workflow'",
+			"type": "n8n-nodes-base.manualTrigger",
+			"typeVersion": 1,
+			"position": [0, 0]
+		},
+		{
+			"parameters": {
+				"operation": "balance"
+			},
+			"id": "8a3f5d0e-0001-4c1a-9d3e-000000000002",
+			"name": "Get Balance",
+			"type": "n8n-nodes-uncensoredllm.uncensoredLlm",
+			"typeVersion": 1,
+			"position": [220, 0],
+			"credentials": {
+				"uncensoredLlmApi": {
+					"id": "ullmTestCred01",
+					"name": "UncensoredLLM account"
+				}
+			}
+		},
+		{
+			"parameters": {
+				"prompt": "Reply with the single word: ready",
+				"options": {
+					"maxTokens": 1024,
+					"reasoningMode": "fast"
+				}
+			},
+			"id": "8a3f5d0e-0001-4c1a-9d3e-000000000003",
+			"name": "Message a Model",
+			"type": "n8n-nodes-uncensoredllm.uncensoredLlm",
+			"typeVersion": 1,
+			"position": [440, 0],
+			"credentials": {
+				"uncensoredLlmApi": {
+					"id": "ullmTestCred01",
+					"name": "UncensoredLLM account"
+				}
+			}
+		},
+		{
+			"parameters": {
+				"promptType": "define",
+				"text": "What is 1234 multiplied by 5678? Use the calculator tool, then give only the number.",
+				"options": {}
+			},
+			"id": "8a3f5d0e-0001-4c1a-9d3e-000000000004",
+			"name": "AI Agent",
+			"type": "@n8n/n8n-nodes-langchain.agent",
+			"typeVersion": 3.1,
+			"position": [660, 0]
+		},
+		{
+			"parameters": {
+				"model": "uncensoredllm-1",
+				"options": {
+					"maxTokens": 4096,
+					"reasoningMode": "fast"
+				}
+			},
+			"id": "8a3f5d0e-0001-4c1a-9d3e-000000000005",
+			"name": "UncensoredLLM Chat Model",
+			"type": "n8n-nodes-uncensoredllm.lmChatUncensoredLlm",
+			"typeVersion": 1,
+			"position": [600, 220],
+			"credentials": {
+				"uncensoredLlmApi": {
+					"id": "ullmTestCred01",
+					"name": "UncensoredLLM account"
+				}
+			}
+		},
+		{
+			"parameters": {},
+			"id": "8a3f5d0e-0001-4c1a-9d3e-000000000006",
+			"name": "Calculator",
+			"type": "@n8n/n8n-nodes-langchain.toolCalculator",
+			"typeVersion": 1,
+			"position": [780, 220]
+		}
+	],
+	"connections": {
+		"When clicking 'Execute workflow'": {
+			"main": [[{ "node": "Get Balance", "type": "main", "index": 0 }]]
+		},
+		"Get Balance": {
+			"main": [[{ "node": "Message a Model", "type": "main", "index": 0 }]]
+		},
+		"Message a Model": {
+			"main": [[{ "node": "AI Agent", "type": "main", "index": 0 }]]
+		},
+		"UncensoredLLM Chat Model": {
+			"ai_languageModel": [[{ "node": "AI Agent", "type": "ai_languageModel", "index": 0 }]]
+		},
+		"Calculator": {
+			"ai_tool": [[{ "node": "AI Agent", "type": "ai_tool", "index": 0 }]]
+		}
+	},
+	"settings": { "executionOrder": "v1" },
+	"pinData": {}
+}

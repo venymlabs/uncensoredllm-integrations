@@ -1,0 +1,26 @@
+{
+  "language_models": {
+    "openai_compatible": {
+      "uncensoredllm": {
+        "api_url": "https://uncensoredllm.xyz/v1",
+        "available_models": [
+          {
+            "name": "uncensoredllm-1",
+            "display_name": "UncensoredLLM 1",
+            "max_tokens": 262144,
+            "max_output_tokens": 65536,
+            "capabilities": {
+              "tools": true,
+              "images": false,
+              "parallel_tool_calls": false,
+              "prompt_cache_key": false,
+              "chat_completions": true,
+              "interleaved_reasoning": false,
+              "max_tokens_parameter": true
+            }
+          }
+        ]
+      }
+    }
+  }
+}

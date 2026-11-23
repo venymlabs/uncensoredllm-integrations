@@ -1,0 +1,28 @@
+{
+  "name": "uncensoredllm",
+  "engine": "openai",
+  "display_name": "UncensoredLLM",
+  "description": "One uncensored reasoning model served from UncensoredLLM's own GPUs over an OpenAI-compatible API, with tool calls and a 262K-token context. Reasoning is always on and streams as reasoning_content.",
+  "api_key_env": "UNCENSOREDLLM_API_KEY",
+  "base_url": "https://uncensoredllm.xyz/v1/chat/completions",
+  "models": [
+    {
+      "name": "uncensoredllm-1",
+      "context_limit": 262144,
+      "input_token_cost": 0.0000003,
+      "output_token_cost": 0.0000012,
+      "currency": "USD",
+      "supports_cache_control": null
+    }
+  ],
+  "headers": null,
+  "timeout_seconds": null,
+  "preserves_thinking": true,
+  "supports_streaming": true,
+  "setup": {
+    "category": "model",
+    "setup_method": "single_api_key",
+    "group": "additional",
+    "docs_url": "https://uncensoredllm.xyz/docs/quickstart"
+  }
+}

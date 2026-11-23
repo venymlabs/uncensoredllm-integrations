@@ -1,0 +1,27 @@
+{
+  "isCustom": true,
+  "id": "uncensoredllm",
+  "name": "UncensoredLLM",
+  "type": "openai",
+  "urls": {
+    "website": "https://uncensoredllm.xyz/?src=chatbox",
+    "getApiKey": "https://uncensoredllm.xyz/?src=chatbox",
+    "docs": "https://uncensoredllm.xyz/docs"
+  },
+  "settings": {
+    "apiHost": "https://uncensoredllm.xyz/v1",
+    "models": [
+      {
+        "modelId": "uncensoredllm-1",
+        "nickname": "UncensoredLLM 1",
+        "type": "chat",
+        "capabilities": [
+          "reasoning",
+          "tool_use"
+        ],
+        "contextWindow": 262144,
+        "maxOutput": 65536
+      }
+    ]
+  }
+}

@@ -1,0 +1,102 @@
+{
+  "name": "uncensoredllm",
+  "displayName": "UncensoredLLM",
+  "description": "Adds UncensoredLLM 1 to the chat model picker: one uncensored LLM, served from our own GPUs. Your key stays in VS Code's secret storage.",
+  "version": "0.1.0",
+  "publisher": "uncensoredllm",
+  "license": "MIT",
+  "icon": "icon.png",
+  "homepage": "https://uncensoredllm.xyz/?src=vscode",
+  "engines": {
+    "vscode": "^1.104.0"
+  },
+  "categories": [
+    "AI",
+    "Chat"
+  ],
+  "keywords": [
+    "uncensored",
+    "llm",
+    "language model",
+    "chat",
+    "byok",
+    "openai-compatible"
+  ],
+  "main": "./src/extension.js",
+  "activationEvents": [],
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": true
+    },
+    "virtualWorkspaces": true
+  },
+  "contributes": {
+    "languageModelChatProviders": [
+      {
+        "vendor": "uncensoredllm",
+        "displayName": "UncensoredLLM",
+        "managementCommand": "uncensoredllm.manage"
+      }
+    ],
+    "commands": [
+      {
+        "command": "uncensoredllm.manage",
+        "title": "Manage",
+        "category": "UncensoredLLM"
+      },
+      {
+        "command": "uncensoredllm.setApiKey",
+        "title": "Set API Key",
+        "category": "UncensoredLLM"
+      },
+      {
+        "command": "uncensoredllm.removeApiKey",
+        "title": "Remove API Key",
+        "category": "UncensoredLLM"
+      },
+      {
+        "command": "uncensoredllm.checkConnection",
+        "title": "Check Connection",
+        "category": "UncensoredLLM"
+      },
+      {
+        "command": "uncensoredllm.getApiKey",
+        "title": "Get an API Key",
+        "category": "UncensoredLLM"
+      }
+    ],
+    "configuration": {
+      "title": "UncensoredLLM",
+      "properties": {
+        "uncensoredllm.reasoningMode": {
+          "type": "string",
+          "enum": [
+            "default",
+            "fast"
+          ],
+          "enumDescriptions": [
+            "The model thinks as long as it needs before answering.",
+            "Shorter thinking, quicker first token."
+          ],
+          "default": "default",
+          "description": "How long the model thinks before it answers."
+        },
+        "uncensoredllm.baseUrl": {
+          "type": "string",
+          "default": "https://uncensoredllm.xyz/v1",
+          "scope": "application",
+          "description": "API base URL. Leave as is unless you were told otherwise. Must be https (http only for localhost). User settings only: a workspace cannot change where your key is sent."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "test": "node --test test/unit/*.test.js",
+    "test:vscode": "node test/e2e/runTest.js",
+    "package": "vsce package --no-dependencies --allow-missing-repository --out ../dist/"
+  },
+  "devDependencies": {
+    "@vscode/test-electron": "3.1.0",
+    "@vscode/vsce": "4.1.1"
+  }
+}

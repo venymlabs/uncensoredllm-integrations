@@ -1,0 +1,21 @@
+[
+	{
+		"vendor": "customendpoint",
+		"name": "UncensoredLLM",
+		"apiType": "chat-completions",
+		"models": [
+			{
+				"id": "uncensoredllm-1",
+				"name": "UncensoredLLM 1",
+				"url": "https://uncensoredllm.xyz/v1",
+				"apiType": "chat-completions",
+				"toolCalling": true,
+				"vision": false,
+				"contextWindow": 262144,
+				"maxOutputTokens": 65536,
+				"thinking": true,
+				"streaming": true
+			}
+		]
+	}
+]

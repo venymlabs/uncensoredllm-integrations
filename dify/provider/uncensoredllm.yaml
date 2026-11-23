@@ -1,0 +1,46 @@
+provider: uncensoredllm
+label:
+  en_US: UncensoredLLM
+description:
+  en_US: One uncensored LLM, served from our own GPUs, through an OpenAI-compatible API.
+icon_small:
+  en_US: icon_s_en.svg
+icon_large:
+  en_US: icon_l_en.svg
+background: '#F4F4F4'
+help:
+  title:
+    en_US: Get an API key from UncensoredLLM
+  url:
+    en_US: https://uncensoredllm.xyz/docs
+supported_model_types:
+  - llm
+configurate_methods:
+  - predefined-model
+provider_credential_schema:
+  credential_form_schemas:
+    - variable: api_key
+      label:
+        en_US: API Key
+      type: secret-input
+      required: true
+      placeholder:
+        en_US: Your vk- key
+    - variable: endpoint_url
+      label:
+        en_US: API Base URL
+      type: text-input
+      required: false
+      default: https://uncensoredllm.xyz/v1
+      placeholder:
+        en_US: https://uncensoredllm.xyz/v1
+models:
+  llm:
+    position: models/llm/_position.yaml
+    predefined:
+      - models/llm/*.yaml
+extra:
+  python:
+    provider_source: provider/uncensoredllm.py
+    model_sources:
+      - models/llm/llm.py

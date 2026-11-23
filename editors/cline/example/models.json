@@ -1,0 +1,34 @@
+{
+  "version": 1,
+  "providers": {
+    "uncensoredllm": {
+      "provider": {
+        "name": "UncensoredLLM",
+        "baseUrl": "https://uncensoredllm.xyz/v1",
+        "defaultModelId": "uncensoredllm-1",
+        "protocol": "openai-chat",
+        "client": "openai-compatible",
+        "capabilities": [
+          "tools",
+          "reasoning",
+          "streaming"
+        ]
+      },
+      "models": {
+        "uncensoredllm-1": {
+          "id": "uncensoredllm-1",
+          "name": "UncensoredLLM 1",
+          "contextWindow": 262144,
+          "maxTokens": 65536,
+          "capabilities": [
+            "tools",
+            "streaming",
+            "reasoning"
+          ],
+          "supportsReasoning": true,
+          "supportsVision": false
+        }
+      }
+    }
+  }
+}

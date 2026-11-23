@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "modes": {},
+  "providers": {
+    "uncensoredllm": {
+      "settings": {
+        "provider": "uncensoredllm",
+        "baseUrl": "https://uncensoredllm.xyz/v1",
+        "model": "uncensoredllm-1"
+      },
+      "updatedAt": "2026-11-23T00:00:00.000Z",
+      "tokenSource": "manual"
+    }
+  }
+}

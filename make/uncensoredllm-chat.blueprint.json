@@ -1,0 +1,61 @@
+{
+	"name": "UncensoredLLM: send a prompt",
+	"flow": [
+		{
+			"id": 1,
+			"module": "http:ActionSendDataAPIKeyAuth",
+			"version": 3,
+			"parameters": {
+				"handleErrors": true
+			},
+			"mapper": {
+				"url": "https://uncensoredllm.xyz/v1/chat/completions",
+				"serializeUrl": false,
+				"method": "post",
+				"headers": [],
+				"qs": [],
+				"bodyType": "raw",
+				"parseResponse": true,
+				"timeout": "300",
+				"shareCookies": false,
+				"ca": "",
+				"rejectUnauthorized": true,
+				"followRedirect": true,
+				"useQuerystring": false,
+				"gzip": true,
+				"useMtls": false,
+				"contentType": "application/json",
+				"data": "{\"model\":\"uncensoredllm-1\",\"reasoning_mode\":\"fast\",\"messages\":[{\"role\":\"user\",\"content\":\"Write a two-line poem about the sea.\"}]}"
+			},
+			"metadata": {
+				"designer": {
+					"x": 0,
+					"y": 0
+				},
+				"notes": "Keychain: HTTP > API Key Auth. Key = Bearer followed by a space and your vk- key; API Key placement = In the header; API Key parameter name = Authorization. The reply text is at data.choices[1].message.content (Make arrays start at 1)."
+			}
+		}
+	],
+	"metadata": {
+		"instant": false,
+		"version": 1,
+		"scenario": {
+			"roundtrips": 1,
+			"maxErrors": 3,
+			"autoCommit": true,
+			"autoCommitTriggerLast": true,
+			"sequential": true,
+			"confidential": false,
+			"dataloss": false,
+			"dlq": false,
+			"freshVariables": false
+		},
+		"designer": {
+			"orphans": []
+		},
+		"notes": [
+			"UncensoredLLM (https://uncensoredllm.xyz): one HTTP module that calls the OpenAI-compatible chat endpoint.",
+			"After import: open the HTTP module, add a keychain (API Key Auth) as described in the module note, then edit the JSON body."
+		]
+	}
+}

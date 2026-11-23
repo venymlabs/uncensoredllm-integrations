@@ -4,24 +4,13 @@ import { createAgent, tool } from 'langchain';
 import { ChatOpenAI } from '@langchain/openai';
 import { z } from 'zod';
 
-// createAgent names every AI message after the agent node ("model"), and the API answers 400
-// ("tool-call author name `model` is incompatible with `tool_name` mode") when an assistant message
-// that carries tool_calls also carries a `name`. Until the API ignores that field, drop it on the way out.
-const dropAssistantNames = async (url, init) => {
-  if (init?.body && typeof init.body === 'string') {
-    const body = JSON.parse(init.body);
-    if (Array.isArray(body.messages)) {
-      for (const m of body.messages) if (m.role === 'assistant') delete m.name;
-      init = { ...init, body: JSON.stringify(body) };
-    }
-  }
-  return fetch(url, init);
-};
-
+// createAgent names every AI message after the agent node ("model") and @langchain/openai sends that as
+// `name` on the assistant message that carries the tool calls. The API used to answer 400 to that; since
+// 2026-11-23 it ignores the field there, as OpenAI does, so no workaround is needed.
 const model = new ChatOpenAI({
   model: 'uncensoredllm-1',
   apiKey: process.env.UNCENSOREDLLM_API_KEY,
-  configuration: { baseURL: 'https://uncensoredllm.xyz/v1', fetch: dropAssistantNames },
+  configuration: { baseURL: 'https://uncensoredllm.xyz/v1' },
   maxRetries: 0,
 });
 

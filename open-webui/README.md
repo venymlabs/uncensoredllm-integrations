@@ -5,7 +5,7 @@
 Open WebUI can also reach the API with no function at all, as an OpenAI connection (Admin Settings > Connections, URL `https://uncensoredllm.xyz/v1`). The pipe adds what a connection cannot:
 
 - **Per-user keys.** The admin can set one key for everyone, or leave it empty and let each user set their own under **Controls > Valves**. Both are password fields.
-- **Safe defaults.** `max_tokens` below 512 is raised to 512 (the model reasons first; a smaller budget can end in `502 empty_completion`), and a **Reasoning** valve (`extended` or `fast`).
+- **Safe defaults.** `max_tokens` below 512 is raised to 512 (the model reasons first; a smaller budget can be used up before any answer is written), and a **Reasoning** valve (`extended` or `fast`).
 - **Clean requests.** Only the chat completion fields the API understands are forwarded; Open WebUI's own metadata stays local.
 
 Streaming, reasoning (shown as Open WebUI's thinking block) and tool calls pass through untouched.

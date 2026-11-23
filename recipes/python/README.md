@@ -22,7 +22,7 @@ KEY = os.environ["UNCENSOREDLLM_API_KEY"]
 - **Reasoning comes back as `reasoning_content`.** Pydantic AI, Agno and LiteLLM show it. Most others drop it, which does no harm.
 - **`/v1/responses` is stateless.** The endpoint does not store responses and rejects `previous_response_id`. A client that chains turns by id has to send the whole conversation each turn, which usually means `store=False`.
 - **Reasoning items carry no `encrypted_content`.** A client that asks for `include=["reasoning.encrypted_content"]` and replays reasoning items will refuse to continue. Microsoft Agent Framework's Responses client does this (see below).
-- **Extra `metadata` field.** Responses include a top-level `metadata` object that is not in the OpenAI schema. LiteLLM, ADK and AutoGen log pydantic serializer warnings about it; nothing breaks.
+- **No extra fields.** Until 2026-11-23 responses carried a top-level `metadata` object that is not in the OpenAI schema, and LiteLLM, ADK and AutoGen logged pydantic serializer warnings about it. The API no longer sends it.
 
 ## LangChain and LangGraph (tested)
 

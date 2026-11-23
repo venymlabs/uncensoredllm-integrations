@@ -22,6 +22,6 @@ Source, read 2026-11-23: `packages/components/nodes/chatmodels/ChatOpenAICustom/
 
 Notes:
 
-- The model reasons before it answers. A **Max Tokens** below about 400 can be spent on the reasoning alone and returns `502 empty_completion`.
+- The model reasons before it answers. A **Max Tokens** below about 400 can be spent on the reasoning alone, and the answer then comes back empty.
 - Embeddings are not served: point document stores at another embeddings provider.
 - In Agentflow V2, the **LLM** and **Agent** nodes list chat model nodes; pick **OpenAI Custom Model** there and fill in the same values.

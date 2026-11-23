@@ -44,5 +44,5 @@ The key lives in Make's keychain, never in the scenario, so an exported blueprin
 ## Notes
 
 - `reasoning_mode: "fast"` keeps the model's reasoning short. Drop it for harder prompts; the 300-second limit still applies.
-- If you add `max_tokens`, use 512 or more: the model reasons before it answers, and a smaller budget can be spent on the reasoning alone (`502 empty_completion`).
+- If you add `max_tokens`, use 512 or more: the model reasons before it answers, and a smaller budget can be spent on the reasoning alone, and the answer then comes back empty.
 - To check a keychain without spending anything, send `GET https://uncensoredllm.xyz/v1/balance` with it.

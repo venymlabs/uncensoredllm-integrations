@@ -8,10 +8,10 @@ Plugins, packages, import files and tested recipes for using [UncensoredLLM](htt
 | Key | starts with `vk-`, sent as `Authorization: Bearer`; make one at https://uncensoredllm.xyz (no email needed) |
 | Model | `uncensoredllm-1` |
 | Context / max output | 262,144 tokens / 65,536 tokens |
-| Speaks | Chat Completions (streaming, tool calls, JSON mode) and the Responses API |
+| Speaks | Chat Completions (streaming, tool calls, JSON mode), the Responses API, and Anthropic's Messages API at `https://uncensoredllm.xyz/v1/messages` |
 | Does not serve | embeddings, images, audio |
 
-The model reasons before it answers. Leave `max_tokens` unset or at 512 or more: a very small limit can be used up by the reasoning alone.
+The model reasons before it answers. Leave `max_tokens` unset or at 512 or more: a very small limit can be used up by the reasoning alone, and the reply then comes back empty with `finish_reason: "length"`.
 
 ## The quick way: one command
 
@@ -21,7 +21,7 @@ For coding agents, editors and personal agents that are set up through a config 
 npx github:venymlabs/uncensoredllm-connect
 ```
 
-It covers Codex CLI, OpenCode, Aider, Goose, Crush, pi, Qwen Code, OpenClaw, Hermes Agent, nanobot, OpenHands, Cline, Kilo Code, Continue, Zed, VS Code chat, LibreChat, Raycast AI and Factory Droid. Source: [venymlabs/uncensoredllm-connect](https://github.com/venymlabs/uncensoredllm-connect).
+It covers Claude Code, Codex CLI, OpenCode, Aider, Goose, Crush, pi, Qwen Code, OpenClaw, Hermes Agent, nanobot, OpenHands, Cline, Kilo Code, Continue, Zed, VS Code chat, LibreChat, Raycast AI and Factory Droid. Source: [venymlabs/uncensoredllm-connect](https://github.com/venymlabs/uncensoredllm-connect).
 
 ## What is in this repository
 
@@ -71,6 +71,16 @@ How each item was checked is stated, because it differs. "Run" means the real to
 - **AI SDK provider:** `npm install https://github.com/venymlabs/uncensoredllm-integrations/releases/download/v0.1.0/uncensoredllm-ai-sdk-provider-0.1.0.tgz ai zod`. The recipes that import `@uncensoredllm/ai-sdk-provider` need this.
 - **VS Code extension:** download the `.vsix` from the releases page, then run "Extensions: Install from VSIX" in VS Code.
 - **n8n node and Dify plugin:** the packed files are on the releases page; each folder's README says how that platform installs a package that is not from its own directory. The Activepieces piece is source only: build it as its README describes.
+
+## API changes since these were written
+
+2026-11-23: three faults that some of these integrations work around were fixed in the API.
+
+- An assistant message that carries tool calls may have a `name` field. LangChain.js `createAgent` sends one, and it used to get a 400.
+- A small `max_tokens` that the reasoning uses up returns a normal empty reply with `finish_reason: "length"`. It used to return `502 empty_completion`. Code here that raises small values to 512 still does, so that you get an answer; comments that mention the 502 describe the old behaviour.
+- Responses no longer carry a top-level `metadata` object, which strict clients warned about.
+
+The same day the API began to answer in Anthropic's Messages format, so Claude Code and the Anthropic SDKs can use it: base URL `https://uncensoredllm.xyz` (no `/v1`), your `vk-` key, model `uncensoredllm-1`.
 
 ## Not affiliated
 
